@@ -16,6 +16,7 @@
             <li><a href="whisky.html">Віскі</a></li>
             <li><a href="wine.html">Вино</a></li>
             <li><a href="cognac.html" class="active">Коньяк</a></li>
+            <li><a href="about.html">Про нас</a></li>
         </ul>
         <div class="cart-container">
             <div class="cart-status" id="cart-btn">КОШИК (<span id="cart-count">0</span>)</div>
@@ -28,14 +29,17 @@
         </div>
     </nav>
 
-    <main id="catalog">
+    <main id="catalog" style="margin-top: 120px;">
         <h2 class="section-title">Благородні Коньяки</h2>
         <div class="products-grid" id="product-list">
             </div>
     </main>
 
     <footer class="site-footer">
-        <div class="footer-logo">GRAND RESERVE</div>
+        <div class="footer-links">
+            <a href="about.html">Про нас</a>
+            <a href="policy.html">Політика конфіденційності</a>
+        </div>
         <p>© 2026 Grand Reserve. Надмірне споживання алкоголю шкодить здоров'ю.</p>
     </footer>
 
@@ -43,9 +47,9 @@
         <div class="modal-content">
             <span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
             <h2>Оформлення замовлення</h2>
-            <form onsubmit="alert('Дякуємо! Замовлення прийнято.'); localStorage.removeItem('luxury_cart'); location.reload();">
-                <input type="text" placeholder="Ваше ім'я" required style="width:100%; padding:12px; margin:10px 0; background:#222; border:1px solid #333; color:white;">
-                <input type="tel" placeholder="Телефон" required style="width:100%; padding:12px; margin:10px 0; background:#222; border:1px solid #333; color:white;">
+            <form id="checkout-form">
+                <input type="text" placeholder="Ваше ім'я" required>
+                <input type="tel" placeholder="Телефон" required>
                 <button type="submit" class="btn-gold-filled">ПІДТВЕРДИТИ</button>
             </form>
         </div>

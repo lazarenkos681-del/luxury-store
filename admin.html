@@ -6,77 +6,46 @@
     <title>Адмін-панель | Grand Reserve</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Стиль для прихованого контенту, поки не введено пароль */
-        #admin-content { display: none; }
-        .access-denied { text-align: center; margin-top: 50px; color: var(--gold); font-family: 'Playfair Display', serif; }
-    </style>
+    <style>#admin-content { display: none; }</style>
 </head>
 <body class="admin-body">
-
     <script>
-        // === НАЛАШТУВАННЯ ПАРОЛЯ ===
-        // Ти можеш змінити "1234" на свій складний пароль
-        const SECRET_PASSWORD = "1234"; 
-
-        function checkAccess() {
-            let sessionPass = sessionStorage.getItem('admin_access');
-            
-            if (sessionPass === SECRET_PASSWORD) {
+        const PASS = "1234"; // ЗМІНИ ПАРОЛЬ ТУТ
+        window.onload = () => {
+            if (sessionStorage.getItem('access') === PASS) {
                 document.getElementById('admin-content').style.display = 'block';
             } else {
-                let pass = prompt("Введіть пароль адміністратора для доступу до бази:");
-                if (pass === SECRET_PASSWORD) {
-                    sessionStorage.setItem('admin_access', pass);
+                let p = prompt("Введіть пароль:");
+                if (p === PASS) {
+                    sessionStorage.setItem('access', p);
                     document.getElementById('admin-content').style.display = 'block';
                 } else {
-                    alert("Доступ заборонено! Повернення на головну.");
+                    alert("Відмовлено");
                     window.location.href = "index.html";
                 }
             }
-        }
-        
-        // Перевірка при завантаженні
-        window.onload = checkAccess;
+        };
     </script>
 
     <div id="admin-content">
         <div class="admin-container wide">
-            <h2 style="color:var(--gold); margin-bottom: 20px;">Керування базою даних</h2>
-            
+            <h2>Керування товарами</h2>
             <form id="admin-form">
                 <input type="hidden" id="edit-id">
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <input type="text" id="admin-name" placeholder="Назва напою" required>
-                    <input type="number" id="admin-price" placeholder="Ціна (грн)" required>
-                </div>
-                
-                <input type="text" id="admin-img" placeholder="URL зображення (PNG без фону)" required>
-                
-                <textarea id="admin-desc" placeholder="Опис товару, смакові ноти, витримка..." rows="4"></textarea>
-                
+                <input type="text" id="admin-name" placeholder="Назва" required>
+                <input type="number" id="admin-price" placeholder="Ціна" required>
+                <input type="text" id="admin-img" placeholder="URL картинки (PNG)" required>
+                <textarea id="admin-desc" placeholder="Опис..."></textarea>
                 <select id="admin-category">
                     <option value="whisky">Віскі</option>
                     <option value="wine">Вино</option>
                     <option value="cognac">Коньяк</option>
                 </select>
-                
-                <button type="submit" id="admin-submit-btn" class="btn-gold-filled">ОПУБЛІКУВАТИ В БАЗУ</button>
+                <button type="submit" id="admin-submit-btn" class="btn-gold-filled">ЗБЕРЕГТИ</button>
             </form>
-
-            <hr style="margin:40px 0; border:0.5px solid #333;">
-
-            <h3>Список товарів у хмарі:</h3>
-            <div id="admin-product-list" class="admin-list"></div>
-            
-            <div style="margin-top:20px; display: flex; justify-content: space-between;">
-                <a href="index.html" style="color:var(--gold); text-decoration:none;">← На сайт</a>
-                <button onclick="sessionStorage.removeItem('admin_access'); location.reload();" style="background:none; border:none; color:#666; cursor:pointer; font-size:12px;">Вийти з кабінету</button>
-            </div>
+            <div id="admin-product-list" class="admin-list" style="margin-top:20px;"></div>
         </div>
     </div>
-
     <script type="module" src="script.js"></script>
 </body>
 </html>

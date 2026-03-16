@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмін-панель | Grand Reserve</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+    <div class="admin-container wide">
+        <h2 style="margin-bottom:20px; color:var(--gold);">Керування базою даних</h2>
+        
+        <form id="admin-form">
+            <input type="hidden" id="edit-id">
+            <input type="text" id="admin-name" placeholder="Назва напою" required>
+            <input type="number" id="admin-price" placeholder="Ціна (грн)" required>
+            <input type="text" id="admin-img" placeholder="URL зображення" required>
+            <textarea id="admin-desc" placeholder="Опис товару, смакові ноти..." rows="4"></textarea>
+            <select id="admin-category">
+                <option value="whisky">Віскі</option>
+                <option value="wine">Вино</option>
+                <option value="cognac">Коньяк</option>
+            </select>
+            <button type="submit" id="admin-submit-btn" class="btn-gold-filled">ОПУБЛІКУВАТИ В БАЗУ</button>
+        </form>
+
+        <hr style="margin:40px 0; border:0.5px solid #333;">
+
+        <h3>Список товарів у хмарі:</h3>
+        <div id="admin-product-list" class="admin-list"></div>
+        
+        <div style="margin-top:20px;">
+            <a href="index.html" style="color:var(--gold); text-decoration:none;">← Повернутися на сайт</a>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

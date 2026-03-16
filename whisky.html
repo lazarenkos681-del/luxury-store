@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Віскі | Grand Reserve</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">GRAND RESERVE</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Все</a></li>
+            <li><a href="whisky.html" class="active">Віскі</a></li>
+            <li><a href="wine.html">Вино</a></li>
+            <li><a href="cognac.html">Коньяк</a></li>
+        </ul>
+        <div class="cart-container">
+            <div class="cart-status" id="cart-btn">КОШИК (<span id="cart-count">0</span>)</div>
+            <div class="cart-dropdown" id="cart-dropdown">
+                <div id="cart-items"></div>
+                <div class="cart-total">Разом: <span id="cart-total-price">0</span> ₴</div>
+                <button class="btn-gold-filled" onclick="openCheckout()">ОФОРМИТИ</button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="catalog">
+        <h2 class="section-title">Колекція Віскі</h2>
+        <div class="products-grid" id="product-list"></div>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

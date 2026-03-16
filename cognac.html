@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Коньяк | Grand Reserve</title>
+    <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -35,14 +36,14 @@
 
     <footer class="site-footer">
         <div class="footer-logo">GRAND RESERVE</div>
-        <p>© 2026 Всі права захищені. Надмірне споживання алкоголю шкодить вашому здоров'ю.</p>
+        <p>© 2026 Grand Reserve. Надмірне споживання алкоголю шкодить здоров'ю.</p>
     </footer>
 
     <div id="checkout-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
             <h2>Оформлення замовлення</h2>
-            <form onsubmit="alert('Замовлення прийнято!'); localStorage.removeItem('luxury_cart'); location.reload();">
+            <form onsubmit="alert('Дякуємо! Замовлення прийнято.'); localStorage.removeItem('luxury_cart'); location.reload();">
                 <input type="text" placeholder="Ваше ім'я" required style="width:100%; padding:12px; margin:10px 0; background:#222; border:1px solid #333; color:white;">
                 <input type="tel" placeholder="Телефон" required style="width:100%; padding:12px; margin:10px 0; background:#222; border:1px solid #333; color:white;">
                 <button type="submit" class="btn-gold-filled">ПІДТВЕРДИТИ</button>

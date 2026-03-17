@@ -3,37 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Політика | Grand Reserve</title>
+    <title>Політика конфіденційності | Grand Reserve</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <nav>
-        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">GRAND RESERVE</a></div>
+        <div class="logo">
+            <a href="index.html">GRAND RESERVE</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="whisky.html">Віскі</a></li>
+            <li><a href="wine.html">Вино</a></li>
+            <li><a href="cognac.html">Коньяк</a></li>
+        </ul>
     </nav>
 
-    <div class="content-page" style="text-align: left;">
-        <h1>Політика конфіденційності</h1>
-        <p>Ваша приватність є нашим пріоритетом. Ми збираємо ваші дані (ім'я, телефон) виключно для обробки замовлень у магазині Grand Reserve.</p>
-        
-        <h3 style="color:var(--gold); margin: 20px 0;">1. Використання даних</h3>
-        <p>Надана вами інформація використовується для підтвердження замовлення та доставки товару. Ми не передаємо ваші дані третім особам.</p>
-        
-        <h3 style="color:var(--gold); margin: 20px 0;">2. Безпека</h3>
-        <p>Усі персональні дані захищені відповідно до стандартів безпеки. Доступ до них мають лише авторизовані співробітники магазину.</p>
-        
-        <h3 style="color:var(--gold); margin: 20px 0;">3. Згода</h3>
-        <p>Користуючись нашим сайтом, ви автоматично погоджуєтесь з умовами цієї політики.</p>
+    <div class="content-page">
+        <h1 class="policy-title">Політика конфіденційності</h1>
+        <div class="gold-divider"></div>
+
+        <div class="policy-content">
+            <section>
+                <h3>1. Збір інформації</h3>
+                <p>Ми збираємо персональні дані (ім'я, телефон, email), які ви добровільно надаєте при оформленні замовлення або реєстрації в адмін-панелі. Також ми перевіряємо вік користувача для дотримання законодавства України щодо продажу алкоголю.</p>
+            </section>
+
+            <section>
+                <h3>2. Використання даних</h3>
+                <p>Ваші дані використовуються виключно для обробки замовлень, зв'язку з вами та покращення сервісу Grand Reserve. Ми не передаємо вашу інформацію третім особам, крім служб доставки (наприклад, Нова Пошта) для виконання замовлення.</p>
+            </section>
+
+            <section>
+                <h3>3. Захист інформації</h3>
+                <p>Ми використовуємо сучасні методи шифрування та безпечні протоколи Firebase для захисту ваших даних від несанкціонованого доступу.</p>
+            </section>
+
+            <section>
+                <h3>4. Файли Cookie</h3>
+                <p>Наш сайт використовує файли cookie для збереження товарів у вашому кошику та аналізу відвідуваності сайту.</p>
+            </section>
+        </div>
     </div>
 
     <footer class="site-footer">
         <div class="footer-logo">GRAND RESERVE</div>
         <div class="footer-links">
             <a href="about.html">Про нас</a>
+            <a href="delivery.html">Доставка</a>
+            <a href="policy.html" class="active">Політика</a>
             <a href="contacts.html">Контакти</a>
-            <a href="policy.html">Політика</a>
         </div>
-        <p class="copyright">© 2026 Grand Reserve.</p>
+        <p class="copyright">© 2026 Grand Reserve. Всі права захищені.</p>
     </footer>
+
+    <script type="module" src="script.js"></script>
 </body>
 </html>

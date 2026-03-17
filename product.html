@@ -3,19 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Деталі | Grand Reserve</title>
-    <link rel="icon" href="favicon.png" type="image/png">
+    <title>Товар | Grand Reserve</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <nav>
-        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">GRAND RESERVE</a></div>
-        <a href="index.html" class="back-link">← Назад</a>
+        <div class="logo">
+            <a href="index.html">GRAND RESERVE</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Все</a></li>
+            <li><a href="whisky.html">Віскі</a></li>
+            <li><a href="wine.html">Вино</a></li>
+            <li><a href="cognac.html">Коньяк</a></li>
+        </ul>
+        <div class="cart-container">
+            <button class="cart-btn" id="cart-toggle">КОШИК (<span id="cart-count">0</span>)</button>
+        </div>
     </nav>
 
-    <div class="product-page-container" id="product-details">
+    <main class="product-page-container">
+        <div id="product-details" class="product-flex">
+            <div class="product-image-large">
+                <img id="main-product-img" src="https://via.placeholder.com/500x700" alt="Завантаження...">
+            </div>
+            
+            <div class="product-info-detailed">
+                <div class="breadcrumb">
+                    <a href="index.html">Каталог</a> / <span id="product-cat-name">Категорія</span>
+                </div>
+                <h1 id="product-title-full">Завантаження назви...</h1>
+                <div class="gold-divider-small"></div>
+                
+                <div class="product-price-large">
+                    <span id="product-price-val">0</span> ₴
+                </div>
+
+                <div class="product-status" id="product-stock-status">
+                    </div>
+
+                <div class="product-description-full">
+                    <h3>Про напій</h3>
+                    <p id="product-desc-text">Опис завантажується з бази даних Firebase...</p>
+                </div>
+
+                <button class="btn-gold-filled" id="add-to-cart-btn">ДОДАТИ У КОШИК</button>
+                
+                <div class="product-extra-info">
+                    <p><strong>Артикул:</strong> <span id="product-id-display">---</span></p>
+                    <p><strong>Доставка:</strong> Безкоштовно по Києву від 5000 ₴</p>
+                </div>
+            </div>
         </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-logo">GRAND RESERVE</div>
+        <div class="footer-links">
+            <a href="about.html">Про нас</a>
+            <a href="delivery.html">Доставка</a>
+            <a href="contacts.html">Контакти</a>
+        </div>
+        <p class="copyright">© 2026 Grand Reserve. 18+</p>
+    </footer>
 
     <script type="module" src="script.js"></script>
 </body>

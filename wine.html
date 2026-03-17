@@ -4,50 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вино | Grand Reserve</title>
-    <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <nav>
-        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">GRAND RESERVE</a></div>
+        <div class="logo">
+            <a href="index.html">GRAND RESERVE</a>
+        </div>
         <ul class="nav-links">
             <li><a href="index.html">Все</a></li>
             <li><a href="whisky.html">Віскі</a></li>
             <li><a href="wine.html" class="active">Вино</a></li>
             <li><a href="cognac.html">Коньяк</a></li>
-            <li id="auth-menu-item"><a href="auth.html">Вхід</a></li>
         </ul>
         <div class="cart-container">
-            <div class="cart-status" id="cart-btn">КОШИК (<span id="cart-count">0</span>)</div>
-            <div class="cart-dropdown" id="cart-dropdown">
-                <h3>Ваш кошик</h3>
-                <div id="cart-items"></div>
-                <div class="cart-total">Разом: <span id="cart-total-price">0</span> ₴</div>
-                <button class="btn-gold-filled" onclick="openCheckout()">ОФОРМИТИ</button>
-            </div>
+            <button class="cart-btn" id="cart-toggle">КОШИК (<span id="cart-count">0</span>)</button>
         </div>
     </nav>
 
-    <main id="catalog" style="margin-top: 120px; min-height: 60vh;">
-        <h2 class="section-title">Вишукані Вина</h2>
+    <header class="category-hero wine-bg">
+        <div class="hero-content">
+            <h1>Вишукані Вина</h1>
+            <p>Найкращі врожаї Старого та Нового світу</p>
+        </div>
+    </header>
+
+    <main id="catalog">
         <div class="products-grid" id="product-list">
             </div>
     </main>
 
-    <div id="checkout-modal" class="modal">
-        <div class="modal-content stylish-modal">
-            <span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
-            <div class="modal-logo"><img src="logo.png" alt="Logo"></div>
-            <h2 class="modal-title">Замовлення</h2>
-            <p class="modal-subtitle">Залиште контакти для підтвердження замовлення Вина.</p>
-            <form id="checkout-form" class="stylish-form">
-                <div class="form-row"><input type="text" id="customer-name" placeholder="Ваше ім'я" required></div>
-                <div class="form-row"><input type="tel" id="customer-phone" placeholder="Телефон" required></div>
-                <button type="submit" class="btn-gold-filled modal-submit-btn">ПІДТВЕРДИТИ</button>
-            </form>
+    <footer class="site-footer">
+        <div class="footer-logo">GRAND RESERVE</div>
+        <div class="footer-links">
+            <a href="about.html">Про нас</a>
+            <a href="delivery.html">Доставка</a>
+            <a href="contacts.html">Контакти</a>
         </div>
-    </div>
+        <p class="copyright">© 2026 Grand Reserve</p>
+    </footer>
 
     <script type="module" src="script.js"></script>
 </body>

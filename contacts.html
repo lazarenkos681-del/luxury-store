@@ -5,24 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакти | Grand Reserve</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <nav>
-        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">GRAND RESERVE</a></div>
+        <div class="logo">
+            <a href="index.html">GRAND RESERVE</a>
+        </div>
         <ul class="nav-links">
-            <li><a href="index.html">Головна</a></li>
+            <li><a href="index.html">Все</a></li>
+            <li><a href="whisky.html">Віскі</a></li>
+            <li><a href="wine.html">Вино</a></li>
+            <li><a href="cognac.html">Коньяк</a></li>
+            <li><a href="contacts.html" class="active">Контакти</a></li>
         </ul>
     </nav>
 
     <div class="content-page">
-        <h1>Зв'яжіться з нами</h1>
-        <p>Ми завжди раді вітати вас у нашому шоурумі для дегустації та консультації.</p>
-        <div style="margin-top: 40px;">
-            <p><strong>Адреса:</strong> м. Київ, вул. Хрещатик, 1</p>
-            <p><strong>Телефон:</strong> +380 (44) 777-77-77</p>
-            <p><strong>Email:</strong> info@grandreserve.ua</p>
-            <p><strong>Графік роботи:</strong> Щодня з 10:00 до 21:00</p>
+        <h1 class="contact-title">Зв'яжіться з нами</h1>
+        <div class="gold-divider"></div>
+
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="info-item">
+                    <h3>Адреса</h3>
+                    <p>м. Київ, вул. Хрещатик, 1</p>
+                    <p>Шоурум "Grand Reserve"</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3>Телефон</h3>
+                    <p>+380 (44) 777-77-77</p>
+                    <p>+380 (67) 000-00-00</p>
+                </div>
+
+                <div class="info-item">
+                    <h3>Електронна пошта</h3>
+                    <p>info@grandreserve.ua</p>
+                    <p>sales@grandreserve.ua</p>
+                </div>
+
+                <div class="info-item">
+                    <h3>Графік роботи</h3>
+                    <p>Пн - Сб: 10:00 — 21:00</p>
+                    <p>Нд: 11:00 — 19:00</p>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <h3>Напишіть нам</h3>
+                <form id="feedback-form" class="admin-form">
+                    <input type="text" placeholder="Ваше ім'я" required>
+                    <input type="email" placeholder="Email для відповіді" required>
+                    <textarea placeholder="Ваше повідомлення..." style="height: 150px;"></textarea>
+                    <button type="submit" class="btn-gold-filled">Надіслати</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -30,10 +69,13 @@
         <div class="footer-logo">GRAND RESERVE</div>
         <div class="footer-links">
             <a href="about.html">Про нас</a>
-            <a href="contacts.html">Контакти</a>
+            <a href="contacts.html" class="active">Контакти</a>
+            <a href="blog.html">Блог</a>
             <a href="policy.html">Політика</a>
         </div>
-        <p class="copyright">© 2026 Grand Reserve.</p>
+        <p class="copyright">© 2026 Grand Reserve. Всі права захищені.</p>
     </footer>
+
+    <script type="module" src="script.js"></script>
 </body>
 </html>

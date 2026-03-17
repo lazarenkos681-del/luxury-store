@@ -305,3 +305,153 @@ nav {
     padding: 12px 35px; text-transform: uppercase; cursor: pointer; transition: 0.3s;
 }
 .btn-gold:hover { background: var(--gold); color: #000; }
+.admin-container.wide { max-width: 900px; }
+.admin-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--gold);
+}
+/* --- ЗМІННІ ТА ОСНОВНІ НАЛАШТУВАННЯ --- */
+:root {
+    --gold: #d4af37; /* Основне золото */
+    --gold-hover: #f1c40f; /* Світліше золото для наведення */
+    --bg-dark: #0a0a0a; /* Дуже темний фон (майже чорний) */
+    --bg-input: #1a1a1a; /* Темний фон для полів введення (не білий!) */
+    --border-input: #333333; /* Темно-сіра рамка для полів */
+    --text-main: #ffffff; /* Білий текст */
+    --text-muted: #aaaaaa; /* Сірий текст для плейсхолдерів */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+}
+
+/* Навігація */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(0, 0, 0, 0.95);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #222;
+}
+
+.logo a {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+/* --- АДМІН-КОНТЕЙНЕР ТА ФОРМА (Це виправляє "виїдання очей") --- */
+.admin-container {
+    padding: 80px 5%;
+}
+
+.admin-container.wide {
+    max-width: 900px;
+    margin: 100px auto 0;
+}
+
+/* Загальний стиль для всіх полів у формі адмінки */
+.admin-form input[type="text"],
+.admin-form input[type="number"],
+.admin-form select,
+.admin-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--bg-input); /* Темний фон полів (не білий!) */
+    border: 1px solid var(--border-input); /* Темно-сіра рамка */
+    color: var(--text-main); /* Білий текст при введенні */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Змінюємо колір плейсхолдерів (підказки "Назва", "Ціна") на сірий */
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* Ефект при фокусі (коли натискаєш на поле) - рамка стає золотою */
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+    border-color: var(--gold);
+    outline: none; /* Прибирає стандартну синю рамку браузера */
+}
+
+/* Особливості для <select> (випадаючого списку) */
+.admin-form select 
+{
+    -webkit-appearance: none; /* Прибирає стандартну стрілку браузера */
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23d4af37" d="M1 4l5 5 5-5z"/></svg>'); /* Своя золота стрілка */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    cursor: pointer;
+}
+
+/* Особливості для <textarea> */
+.admin-form textarea {
+    resize: vertical; /* Дозволяє змінювати розмір тільки по вертикалі */
+}
+
+/* --- КНОПКИ --- */
+.btn-gold-filled {
+    background-color: var(--gold);
+    color: #000000;
+    border: none;
+    padding: 15px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 2px;
+}
+
+.btn-gold-filled:hover {
+    background-color: var(--gold-hover);
+}
+
+/* --- СПИСОК ТОВАРІВ В АДМІНЦІ (Бонус для гарного вигляду) --- */
+.admin-list {
+    margin-top: 30px;
+}
+
+.admin-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111111; /* Трохи світліший чорний */
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--gold); /* Золота лінія збоку */
+    transition: 0.3s;
+}
+
+.admin-item:hover {
+    background: #1a1a1a;
+}

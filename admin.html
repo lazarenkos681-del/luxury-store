@@ -3,32 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Адмін-центр | Grand Reserve</title>
+    <title>Панель керування | Grand Reserve</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body class="admin-body">
-    <div id="admin-shield" style="display:none;">
-        <div class="admin-container wide">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <h2 style="color:var(--gold);">Керування магазином</h2>
-                <button id="logout-btn" class="btn-gold">Вийти</button>
-            </div>
-            <form id="admin-form" style="background:#111; padding:20px; border:1px solid #333; margin-top:20px;">
-                <input type="hidden" id="edit-id">
-                <input type="text" id="admin-name" placeholder="Назва товару" required>
-                <input type="number" id="admin-price" placeholder="Ціна (грн)" required>
-                <input type="text" id="admin-img" placeholder="URL картинки (PNG)" required>
-                <textarea id="admin-desc" placeholder="Опис товару..."></textarea>
-                <select id="admin-category">
-                    <option value="whisky">Віскі</option>
-                    <option value="wine">Вино</option>
-                    <option value="cognac">Коньяк</option>
-                </select>
-                <button type="submit" id="admin-submit-btn" class="btn-gold-filled">ЗБЕРЕГТИ</button>
+    <nav>
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">GRAND RESERVE</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">На сайт</a></li>
+            <li><button id="logout-btn" style="background:none; border:1px solid var(--gold); color:var(--gold); padding:5px 15px; cursor:pointer; font-family:inherit;">Вийти</button></li>
+        </ul>
+    </nav>
+
+    <div class="admin-container wide" style="margin-top: 100px;">
+        <h2 style="color:var(--gold); font-family:'Playfair Display'; margin-bottom: 30px; text-align: center; text-transform: uppercase; letter-spacing: 2px;">Керування товарами</h2>
+        
+        <div style="background: #111; padding: 30px; border: 1px solid #222; border-radius: 4px; margin-bottom: 50px;">
+            <h3 style="color:#fff; margin-bottom: 20px; font-size: 18px;">Додати новий товар</h3>
+            <form id="add-product-form" class="admin-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <input type="text" id="prod-name" placeholder="Назва товару (напр. Macallan 12)" required>
+                    <input type="number" id="prod-price" placeholder="Ціна (грн)" required>
+                    <select id="prod-category" required>
+                        <option value="" disabled selected>Оберіть категорію</option>
+                        <option value="whisky">Віскі</option>
+                        <option value="wine">Вино</option>
+                        <option value="cognac">Коньяк</option>
+                    </select>
+                    <input type="text" id="prod-img" placeholder="URL зображення (посилання)">
+                </div>
+                <textarea id="prod-desc" placeholder="Опис товару" style="width: 100%; margin-top: 15px; height: 80px;"></textarea>
+                <button type="submit" class="btn-gold-filled" style="margin-top: 20px; width: 100%;">Опублікувати товар</button>
             </form>
-            <div id="admin-product-list" class="admin-list" style="margin-top:30px;"></div>
         </div>
+
+        <h3 style="color:var(--gold); margin-bottom: 20px; font-size: 18px;">Поточний асортимент</h3>
+        <div id="admin-product-list" class="admin-list">
+            </div>
     </div>
+
     <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -102,7 +102,7 @@ nav {
 
 /* --- HERO СЕКЦІЯ --- */
 .hero {
-    height: 60vh;
+    height: 50vh;
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                 url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2000');
     background-size: cover;
@@ -112,21 +112,26 @@ nav {
 .hero h1 { font-size: clamp(30px, 8vw, 60px); letter-spacing: 10px; text-transform: uppercase; }
 
 /* --- КАТАЛОГ ТА СІТКА --- */
-#catalog { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+#catalog { 
+    padding: 60px 5%; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
 
 .section-title {
     text-align: center; color: var(--gold);
-    font-size: 36px; margin-bottom: 60px;
+    font-size: 32px; margin-bottom: 50px;
     letter-spacing: 4px; text-transform: uppercase;
 }
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* СУВОРО 3 КОЛОНКИ */
+    /* Повертаємо 3 колонки, щоб вони не розтягувалися */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 30px;
 }
 
-/* КАРТКА ТОВАРУ */
+/* КАРТКА ТОВАРУ (Повертаємо колишній вигляд) */
 .product-card {
     background: var(--grey);
     padding: 30px;
@@ -146,18 +151,17 @@ nav {
 }
 
 .product-card img {
-    height: 250px;
+    height: 280px; /* Золота середина для висоти */
     width: auto;
     object-fit: contain;
     margin-bottom: 20px;
-    transition: var(--transition);
 }
 
 .product-card h3 {
     font-size: 18px;
     margin-bottom: 10px;
     font-weight: 400;
-    min-height: 50px;
+    min-height: 54px; /* Щоб назви в 2 рядки не ламали сітку */
 }
 
 .product-card .price {
@@ -165,6 +169,24 @@ nav {
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 20px;
+}
+
+/* КНОПКА КУПИТИ */
+.btn-gold {
+    background: none;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 25px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-gold:hover {
+    background: var(--gold);
+    color: #000;
 }
 
 /* --- МОДАЛЬНЕ ВІКНО --- */
@@ -182,37 +204,41 @@ nav {
     background: #111;
     padding: 40px;
     border: 1px solid var(--gold);
-    width: 90%; max-width: 400px;
+    width: 95%; max-width: 420px;
     text-align: center; border-radius: 8px;
     position: relative;
-    animation: fadeIn 0.4s ease;
 }
 
 .close { position: absolute; top: 15px; right: 20px; font-size: 28px; color: #666; cursor: pointer; }
-.modal-logo img { width: 60px; margin-bottom: 15px; }
 
-/* --- ФУТЕР --- */
+/* ФУТЕР */
 .site-footer {
     background: #050505;
-    padding: 60px 5%;
+    padding: 40px 5%;
     text-align: center;
     border-top: 1px solid #222;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
-/* --- АДАПТИВНІСТЬ --- */
-@media (max-width: 992px) {
+.footer-links a {
+    color: var(--gold);
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+/* АНІМАЦІЯ */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* АДАПТИВНІСТЬ */
+@media (max-width: 1024px) {
     .products-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 600px) {
     .products-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
-    .hero h1 { font-size: 32px; }
-}
-
-/* Анімація */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
 }

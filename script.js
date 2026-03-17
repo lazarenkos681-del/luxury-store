@@ -1,211 +1,197 @@
-// --- 1. ПІДКЛЮЧЕННЯ FIREBASE ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, push, onValue, set, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+// === 1. КОНФІГУРАЦІЯ FIREBASE (Твої дані) ===
 const firebaseConfig = {
-  apiKey: "AIzaSyDt63mFK3ebpBD0qv-QQ3khfi3dBDdcTOg",
-  authDomain: "grand-reserve-3b55c.firebaseapp.com",
-  databaseURL: "https://grand-reserve-3b55c-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "grand-reserve-3b55c",
-  storageBucket: "grand-reserve-3b55c.firebasestorage.app",
-  messagingSenderId: "254377443723",
-  appId: "1:254377443723:web:ff376b45a30dbd32ee6f8e",
-  measurementId: "G-Y6N247WCC9"
+    apiKey: "AIzaSyDt63mFK3ebpBD0qv-QQ3khfi3dBDdcTOg",
+    authDomain: "grand-reserve-3b55c.firebaseapp.com",
+    databaseURL: "https://grand-reserve-3b55c-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "grand-reserve-3b55c",
+    storageBucket: "grand-reserve-3b55c.firebasestorage.app",
+    messagingSenderId: "254377443723",
+    appId: "1:254377443723:web:ff376b45a30dbd32ee6f8e",
+    measurementId: "G-Y6N247WCC9"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const productsRef = ref(db, 'products');
+const auth = getAuth(app);
 
-// --- 2. ГЛОБАЛЬНІ ЗМІННІ ---
-let products = [];
-let cart = JSON.parse(localStorage.getItem('luxury_cart')) || [];
+// === 2. НАЛАШТУВАННЯ АДМІНІСТРАТОРА ===
+const ADMIN_EMAIL = "lazarenkos681@gmail.com";
 
-// --- 3. СИНХРОНІЗАЦІЯ З БАЗОЮ ДАНИХ (Realtime) ---
-onValue(productsRef, (snapshot) => {
-    const data = snapshot.val();
-    products = [];
-    if (data) {
-        // Перетворюємо об'єкт Firebase у масив з ID
-        Object.keys(data).forEach(key => {
-            products.push({ firebaseId: key, ...data[key] });
-        });
-    }
-    
-    // Визначаємо, яку сторінку оновлювати
-    const path = window.location.pathname;
-    if (path.includes('admin.html')) {
-        renderAdminList();
-    } else if (path.includes('whisky.html')) {
-        renderProducts('whisky');
-    } else if (path.includes('wine.html')) {
-        renderProducts('wine');
-    } else if (path.includes('cognac.html')) {
-        renderProducts('cognac');
-    } else if (path.includes('product.html')) {
-        renderProductPage();
-    } else {
-        renderProducts('all');
-    }
-    updateCartUI();
-});
+// === 3. АВТОРИЗАЦІЯ (ВХІД / РЕЄСТРАЦІЯ) ===
+const authForm = document.getElementById('auth-form');
+let isLoginMode = true;
 
-// --- 4. ФУНКЦІЇ КАТАЛОГУ ---
-window.renderProducts = function(filter = 'all') {
-    const list = document.getElementById('product-list');
-    if (!list) return;
-
-    const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
-    
-    list.innerHTML = filtered.map(item => `
-        <div class="card">
-            <div class="img-container" onclick="location.href='product.html?id=${item.id}'">
-                <img src="${item.img}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/300x400?text=No+Image'">
-            </div>
-            <span class="cat-tag">${item.cat}</span>
-            <h3>${item.name}</h3>
-            <p class="price">${Number(item.price).toLocaleString()} ₴</p>
-            <button class="btn-gold-small" onclick="addToCart(${item.id})">У КОШИК</button>
-        </div>
-    `).join('');
-}
-
-// --- 5. СТОРІНКА ТОВАРУ ---
-window.renderProductPage = function() {
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
-    const item = products.find(p => p.id == id);
-    const container = document.getElementById('product-details');
-    if (!item || !container) return;
-
-    container.innerHTML = `
-        <div class="product-flex">
-            <img src="${item.img}" class="product-big-img">
-            <div class="product-info-text">
-                <h1>${item.name}</h1>
-                <p class="cat-label">${item.cat.toUpperCase()}</p>
-                <p class="price-big">${Number(item.price).toLocaleString()} ₴</p>
-                <div class="description">${item.desc || 'Опис скоро з’явиться...'}</div>
-                <button class="btn-gold-filled" onclick="addToCart(${item.id})">ДОДАТИ В КОШИК</button>
-            </div>
-        </div>
-    `;
-}
-
-// --- 6. ЛОГІКА КОШИКА ---
-window.addToCart = function(id) {
-    const p = products.find(x => x.id == id);
-    if (!p) return;
-    const inCart = cart.find(x => x.id == id);
-    if(inCart) inCart.qty++; else cart.push({...p, qty: 1});
-    saveCart();
-    updateCartUI();
-    document.getElementById('cart-dropdown').classList.add('active');
-};
-
-window.removeFromCart = function(id) {
-    cart = cart.filter(i => i.id !== id);
-    saveCart();
-    updateCartUI();
-};
-
-function saveCart() {
-    localStorage.setItem('luxury_cart', JSON.stringify(cart));
-}
-
-window.updateCartUI = function() {
-    const countEl = document.getElementById('cart-count');
-    const totalEl = document.getElementById('cart-total-price');
-    const itemsEl = document.getElementById('cart-items');
-    if (!countEl || !itemsEl) return;
-
-    const totalQty = cart.reduce((s, i) => s + i.qty, 0);
-    const totalPrice = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-
-    countEl.innerText = totalQty;
-    totalEl.innerText = totalPrice.toLocaleString();
-    itemsEl.innerHTML = cart.length === 0 ? '<p style="text-align:center;padding:10px;">Порожньо</p>' : 
-    cart.map(i => `
-        <div class="cart-item">
-            <span>${i.name} (x${i.qty})</span>
-            <button onclick="removeFromCart(${i.id})">×</button>
-        </div>
-    `).join('');
-}
-
-window.openCheckout = function() {
-    if(cart.length === 0) return alert("Кошик порожній!");
-    const modal = document.getElementById('checkout-modal');
-    if(modal) modal.style.display = 'block';
-};
-
-// --- 7. АДМІН-ПАНЕЛЬ (Firebase Write) ---
-const aForm = document.getElementById('admin-form');
-if (aForm) {
-    aForm.onsubmit = (e) => {
+const authToggleBtn = document.getElementById('auth-toggle-btn');
+if (authToggleBtn) {
+    authToggleBtn.onclick = (e) => {
         e.preventDefault();
-        const editId = document.getElementById('edit-id').value;
-        
-        const productData = {
-            id: editId ? parseInt(editId) : Date.now(),
-            name: document.getElementById('admin-name').value,
-            price: parseInt(document.getElementById('admin-price').value),
-            img: document.getElementById('admin-img').value,
-            desc: document.getElementById('admin-desc').value,
-            cat: document.getElementById('admin-category').value
-        };
-
-        if (editId) {
-            // Оновлення існуючого через його firebaseId
-            const item = products.find(p => p.id == editId);
-            set(ref(db, 'products/' + item.firebaseId), productData);
-        } else {
-            // Створення нового
-            push(productsRef, productData);
-        }
-
-        alert('Успішно збережено в базі!');
-        aForm.reset();
-        document.getElementById('edit-id').value = '';
-        document.getElementById('admin-submit-btn').innerText = "ДОДАТИ ТОВАР";
+        isLoginMode = !isLoginMode;
+        document.getElementById('auth-title').innerText = isLoginMode ? "Вхід у кабінет" : "Реєстрація";
+        document.getElementById('auth-submit-btn').innerText = isLoginMode ? "УВІЙТИ" : "СТВОРИТИ АКАУНТ";
+        authToggleBtn.innerText = isLoginMode ? "Зареєструватися" : "Увійти";
     };
 }
 
-window.editProduct = function(id) {
-    const p = products.find(x => x.id === id);
-    if (!p) return;
-    document.getElementById('edit-id').value = p.id;
-    document.getElementById('admin-name').value = p.name;
-    document.getElementById('admin-price').value = p.price;
-    document.getElementById('admin-img').value = p.img;
-    document.getElementById('admin-desc').value = p.desc || '';
-    document.getElementById('admin-category').value = p.cat;
-    document.getElementById('admin-submit-btn').innerText = "ЗБЕРЕГТИ ЗМІНИ";
-    window.scrollTo(0,0);
-};
+if (authForm) {
+    authForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('auth-email').value;
+        const pass = document.getElementById('auth-pass').value;
 
-window.deleteProduct = function(firebaseId) {
-    if(confirm('Видалити цей товар з бази назавжди?')) {
-        remove(ref(db, 'products/' + firebaseId));
-    }
-};
-
-window.renderAdminList = function() {
-    const list = document.getElementById('admin-product-list');
-    if(!list) return;
-    list.innerHTML = products.map(p => `
-        <div class="admin-item">
-            <span>${p.name}</span>
-            <div>
-                <button onclick="editProduct(${p.id})">✎</button>
-                <button onclick="deleteProduct('${p.firebaseId}')">🗑</button>
-            </div>
-        </div>
-    `).join('');
+        try {
+            if (isLoginMode) {
+                await signInWithEmailAndPassword(auth, email, pass);
+                alert("Успішний вхід!");
+                window.location.href = (email === ADMIN_EMAIL) ? "admin.html" : "index.html";
+            } else {
+                await createUserWithEmailAndPassword(auth, email, pass);
+                alert("Акаунт створено!");
+                window.location.href = "index.html";
+            }
+        } catch (error) {
+            alert("Помилка: " + error.message);
+        }
+    };
 }
 
-// Керування кошиком
-document.addEventListener('DOMContentLoaded', () => {
-    const cBtn = document.getElementById('cart-btn');
-    if(cBtn) cBtn.onclick = () => document.getElementById('cart-dropdown').classList.toggle('active');
+// === 4. ПЕРЕВІРКА ТА ЗАХИСТ АДМІНКИ ===
+onAuthStateChanged(auth, (user) => {
+    const adminShield = document.getElementById('admin-shield');
+    const authMenuItem = document.getElementById('auth-menu-item');
+
+    if (window.location.pathname.includes('admin.html')) {
+        if (user && user.email === ADMIN_EMAIL) {
+            if (adminShield) adminShield.style.display = 'block';
+            loadAdminProducts();
+        } else {
+            alert("Доступ лише для адміна!");
+            window.location.href = "auth.html";
+        }
+    }
+
+    if (authMenuItem) {
+        if (user) {
+            authMenuItem.innerHTML = `<a href="#" id="logout-link" style="color:var(--gold);">Вихід (${user.email.split('@')[0]})</a>`;
+            document.getElementById('logout-link').onclick = (e) => {
+                e.preventDefault();
+                signOut(auth).then(() => window.location.href = "index.html");
+            };
+        } else {
+            authMenuItem.innerHTML = `<a href="auth.html" class="btn-gold" style="padding: 5px 15px; border: 1px solid var(--gold);">Вхід</a>`;
+        }
+    }
 });
+
+// === 5. КЕРУВАННЯ ТОВАРАМИ (АДМІНКА) ===
+function loadAdminProducts() {
+    const adminList = document.getElementById('admin-product-list');
+    onValue(ref(db, 'products'), (snapshot) => {
+        if (!adminList) return;
+        adminList.innerHTML = "";
+        snapshot.forEach((child) => {
+            const p = child.val();
+            const div = document.createElement('div');
+            div.className = 'admin-item';
+            div.style = "display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #333;";
+            div.innerHTML = `
+                <span>${p.name} - ${p.price} ₴</span>
+                <button onclick="deleteProduct('${child.key}')" style="color:red; background:none; border:none; cursor:pointer;">Видалити</button>
+            `;
+            adminList.appendChild(div);
+        });
+    });
+}
+
+window.deleteProduct = (id) => {
+    if(confirm("Видалити цей товар?")) remove(ref(db, 'products/' + id));
+};
+
+const adminForm = document.getElementById('admin-form');
+if (adminForm) {
+    adminForm.onsubmit = (e) => {
+        e.preventDefault();
+        const productData = {
+            name: document.getElementById('admin-name').value,
+            price: document.getElementById('admin-price').value,
+            img: document.getElementById('admin-img').value,
+            desc: document.getElementById('admin-desc').value,
+            category: document.getElementById('admin-category').value
+        };
+        push(ref(db, 'products'), productData).then(() => adminForm.reset());
+    };
+}
+
+// === 6. ВІДОБРАЖЕННЯ КАТАЛОГУ ===
+const productList = document.getElementById('product-list');
+if (productList) {
+    onValue(ref(db, 'products'), (snapshot) => {
+        productList.innerHTML = "";
+        const page = window.location.pathname.split('/').pop().replace('.html', '');
+        
+        snapshot.forEach((child) => {
+            const p = child.val();
+            if (page === "index" || page === "" || p.category === page) {
+                productList.innerHTML += `
+                    <div class="product-card">
+                        <img src="${p.img}" alt="${p.name}">
+                        <h3>${p.name}</h3>
+                        <div class="price">${p.price} ₴</div>
+                        <button class="btn-gold" onclick="addToCart('${p.name}', ${p.price}, '${p.img}')">В КОШИК</button>
+                    </div>`;
+            }
+        });
+    });
+}
+
+// === 7. КОШИК ===
+let cart = JSON.parse(localStorage.getItem('luxury_cart')) || [];
+
+window.addToCart = (name, price, img) => {
+    cart.push({ name, price, img });
+    updateCart();
+    alert(name + " додано у кошик!");
+};
+
+function updateCart() {
+    localStorage.setItem('luxury_cart', JSON.stringify(cart));
+    const count = document.getElementById('cart-count');
+    const items = document.getElementById('cart-items');
+    const total = document.getElementById('cart-total-price');
+
+    if (count) count.innerText = cart.length;
+    if (items) {
+        items.innerHTML = cart.map((item, index) => `
+            <div class="cart-item" style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                <span>${item.name}</span>
+                <span>${item.price} ₴</span>
+                <button onclick="removeFromCart(${index})" style="background:none; color:gold; border:none; cursor:pointer;">×</button>
+            </div>
+        `).join('');
+    }
+    if (total) {
+        total.innerText = cart.reduce((acc, item) => acc + Number(item.price), 0);
+    }
+}
+
+window.removeFromCart = (index) => {
+    cart.splice(index, 1);
+    updateCart();
+};
+
+window.openCheckout = () => {
+    if(cart.length === 0) return alert("Кошик порожній!");
+    const modal = document.getElementById('checkout-modal');
+    if (modal) modal.style.display = 'flex';
+};
+
+const cartBtn = document.getElementById('cart-btn');
+const cartDropdown = document.getElementById('cart-dropdown');
+if (cartBtn && cartDropdown) {
+    cartBtn.onclick = () => cartDropdown.classList.toggle('active');
+}
+
+updateCart();

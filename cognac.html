@@ -11,14 +11,14 @@
 <body>
     <nav>
         <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">GRAND RESERVE</a></div>
-       <ul class="nav-links">
-    <li><a href="index.html">Все</a></li>
-    <li><a href="whisky.html">Віскі</a></li>
-    <li><a href="wine.html">Вино</a></li>
-    <li><a href="blog.html">Блог</a></li>
-    <li><a href="delivery.html">Доставка</a></li>
-    <li><a href="contacts.html">Контакти</a></li>
-</ul>
+        <ul class="nav-links">
+            <li><a href="index.html">Все</a></li>
+            <li><a href="whisky.html">Віскі</a></li>
+            <li><a href="wine.html">Вино</a></li>
+            <li><a href="cognac.html" class="active">Коньяк</a></li>
+            <li><a href="about.html">Про нас</a></li>
+            <li id="auth-menu-item"><a href="auth.html">Вхід</a></li>
+        </ul>
         <div class="cart-container">
             <div class="cart-status" id="cart-btn">КОШИК (<span id="cart-count">0</span>)</div>
             <div class="cart-dropdown" id="cart-dropdown">
@@ -40,6 +40,8 @@
         <div class="footer-links">
             <a href="about.html">Про нас</a>
             <a href="policy.html">Політика конфіденційності</a>
+            <a href="delivery.html">Доставка</a>
+            <a href="contacts.html">Контакти</a>
         </div>
         <p>© 2026 Grand Reserve. Надмірне споживання алкоголю шкодить здоров'ю.</p>
     </footer>
@@ -49,8 +51,8 @@
             <span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
             <h2>Оформлення замовлення</h2>
             <form id="checkout-form">
-                <input type="text" placeholder="Ваше ім'я" required>
-                <input type="tel" placeholder="Телефон" required>
+                <input type="text" id="customer-name" placeholder="Ваше ім'я" required>
+                <input type="tel" id="customer-phone" placeholder="Телефон" required>
                 <button type="submit" class="btn-gold-filled">ПІДТВЕРДИТИ</button>
             </form>
         </div>

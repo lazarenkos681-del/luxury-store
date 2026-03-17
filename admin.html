@@ -3,39 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Адмін-панель | Grand Reserve</title>
-    <link rel="icon" href="favicon.png" type="image/png">
+    <title>Адмін-центр | Grand Reserve</title>
     <link rel="stylesheet" href="style.css">
-    <style>#admin-content { display: none; }</style>
 </head>
 <body class="admin-body">
-    <script>
-        const PASS = "1234"; // ЗМІНИ ПАРОЛЬ ТУТ
-        window.onload = () => {
-            if (sessionStorage.getItem('access') === PASS) {
-                document.getElementById('admin-content').style.display = 'block';
-            } else {
-                let p = prompt("Введіть пароль:");
-                if (p === PASS) {
-                    sessionStorage.setItem('access', p);
-                    document.getElementById('admin-content').style.display = 'block';
-                } else {
-                    alert("Відмовлено");
-                    window.location.href = "index.html";
-                }
-            }
-        };
-    </script>
-
-    <div id="admin-content">
+    <div id="admin-shield" style="display:none;">
         <div class="admin-container wide">
-            <h2>Керування товарами</h2>
-            <form id="admin-form">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h2 style="color:var(--gold);">Керування магазином</h2>
+                <button id="logout-btn" class="btn-gold">Вийти</button>
+            </div>
+            <form id="admin-form" style="background:#111; padding:20px; border:1px solid #333; margin-top:20px;">
                 <input type="hidden" id="edit-id">
-                <input type="text" id="admin-name" placeholder="Назва" required>
-                <input type="number" id="admin-price" placeholder="Ціна" required>
+                <input type="text" id="admin-name" placeholder="Назва товару" required>
+                <input type="number" id="admin-price" placeholder="Ціна (грн)" required>
                 <input type="text" id="admin-img" placeholder="URL картинки (PNG)" required>
-                <textarea id="admin-desc" placeholder="Опис..."></textarea>
+                <textarea id="admin-desc" placeholder="Опис товару..."></textarea>
                 <select id="admin-category">
                     <option value="whisky">Віскі</option>
                     <option value="wine">Вино</option>
@@ -43,7 +26,7 @@
                 </select>
                 <button type="submit" id="admin-submit-btn" class="btn-gold-filled">ЗБЕРЕГТИ</button>
             </form>
-            <div id="admin-product-list" class="admin-list" style="margin-top:20px;"></div>
+            <div id="admin-product-list" class="admin-list" style="margin-top:30px;"></div>
         </div>
     </div>
     <script type="module" src="script.js"></script>

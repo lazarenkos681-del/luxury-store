@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизація | Grand Reserve</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+    <nav><div class="logo"><a href="index.html" style="color:inherit; text-decoration:none;">GRAND RESERVE</a></div></nav>
+    <div class="admin-container" style="max-width: 400px; margin: 100px auto; background: #111; padding: 40px; border: 1px solid #333;">
+        <h2 id="auth-title" style="color:var(--gold); text-align: center;">Вхід у кабінет</h2>
+        <form id="auth-form" style="margin-top: 20px;">
+            <input type="email" id="auth-email" placeholder="Email" required style="width:100%; padding:12px; margin-bottom:15px; background:#222; border:1px solid #444; color:white;">
+            <input type="password" id="auth-pass" placeholder="Пароль" required style="width:100%; padding:12px; margin-bottom:20px; background:#222; border:1px solid #444; color:white;">
+            <button type="submit" id="auth-submit-btn" class="btn-gold-filled" style="width: 100%;">УВІЙТИ</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #888;">
+            <span id="auth-toggle-text">Ще не маєте акаунту?</span> 
+            <a href="#" id="auth-toggle-btn" style="color: var(--gold); text-decoration: none;">Зареєструватися</a>
+        </p>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

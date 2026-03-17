@@ -111,77 +111,85 @@ nav {
 }
 .hero h1 { font-size: clamp(30px, 8vw, 60px); letter-spacing: 10px; text-transform: uppercase; }
 
-/* --- КАТАЛОГ ТА СІТКА --- */
-#catalog { 
-    padding: 60px 5%; 
-    max-width: 1400px; 
-    margin: 0 auto; 
-}
-
-.section-title {
-    text-align: center; color: var(--gold);
-    font-size: 32px; margin-bottom: 50px;
-    letter-spacing: 4px; text-transform: uppercase;
+/* --- КАТАЛОГ ТА КАРТКИ (Точно як на скріншоті) --- */
+#catalog {
+    padding: 60px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .products-grid {
     display: grid;
-    /* Повертаємо 3 колонки, щоб вони не розтягувалися */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px;
 }
 
-/* КАРТКА ТОВАРУ (Повертаємо колишній вигляд) */
+/* Основна картка */
 .product-card {
-    background: var(--grey);
-    padding: 30px;
+    background: #0f0f0f; /* Дуже темний фон, майже чорний */
+    padding: 40px 20px;
     text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Тонка золота рамка */
     transition: var(--transition);
-    border: 1px solid transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 4px;
+    height: 100%;
 }
 
 .product-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--gold);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    border-color: var(--gold); /* Яскравіша рамка при наведенні */
+    transform: translateY(-5px);
 }
 
+/* Зображення пляшки */
 .product-card img {
-    height: 280px; /* Золота середина для висоти */
+    height: 300px; /* Висока пляшка */
     width: auto;
     object-fit: contain;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
+/* Категорія над назвою (маленькими літерами) */
+.product-card .category-label {
+    font-size: 12px;
+    text-transform: lowercase;
+    color: #888;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+/* Назва товару */
 .product-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    font-weight: 400;
-    min-height: 54px; /* Щоб назви в 2 рядки не ламали сітку */
+    font-family: var(--font-heading);
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 15px;
+    font-weight: 700;
+    min-height: 50px;
 }
 
+/* Ціна */
 .product-card .price {
     color: var(--gold);
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
-/* КНОПКА КУПИТИ */
+/* Кнопка "У КОШИК" (Прямокутна з рамкою) */
 .btn-gold {
     background: none;
     border: 1px solid var(--gold);
     color: var(--gold);
-    padding: 10px 25px;
+    padding: 12px 35px;
     text-transform: uppercase;
     font-size: 12px;
-    letter-spacing: 1px;
+    font-weight: 600;
+    letter-spacing: 2px;
     cursor: pointer;
     transition: var(--transition);
+    border-radius: 0; /* Строгий прямий кут */
 }
 
 .btn-gold:hover {

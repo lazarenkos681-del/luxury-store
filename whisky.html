@@ -21,6 +21,7 @@
         <div class="cart-container">
             <div class="cart-status" id="cart-btn">КОШИК (<span id="cart-count">0</span>)</div>
             <div class="cart-dropdown" id="cart-dropdown">
+                <h3>Ваш кошик</h3>
                 <div id="cart-items"></div>
                 <div class="cart-total">Разом: <span id="cart-total-price">0</span> ₴</div>
                 <button class="btn-gold-filled" onclick="openCheckout()">ОФОРМИТИ</button>
@@ -28,14 +29,26 @@
         </div>
     </nav>
 
-    <main id="catalog" style="margin-top: 120px;">
-        <h2 class="section-title">Колекція Віскі</h2>
-        <div class="products-grid" id="product-list"></div>
+    <main id="catalog" style="margin-top: 120px; min-height: 60vh;">
+        <h2 class="section-title">Ексклюзивний Віскі</h2>
+        <div class="products-grid" id="product-list">
+            </div>
     </main>
 
-    <footer class="site-footer">
-        <div class="footer-links"><a href="about.html">Про нас</a> | <a href="policy.html">Політика</a></div>
-    </footer>
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content stylish-modal">
+            <span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+            <div class="modal-logo"><img src="logo.png" alt="Logo"></div>
+            <h2 class="modal-title">Замовлення</h2>
+            <p class="modal-subtitle">Залиште контакти для підтвердження замовлення Віскі.</p>
+            <form id="checkout-form" class="stylish-form">
+                <div class="form-row"><input type="text" id="customer-name" placeholder="Ваше ім'я" required></div>
+                <div class="form-row"><input type="tel" id="customer-phone" placeholder="Телефон" required></div>
+                <button type="submit" class="btn-gold-filled modal-submit-btn">ПІДТВЕРДИТИ</button>
+            </form>
+        </div>
+    </div>
+
     <script type="module" src="script.js"></script>
 </body>
 </html>

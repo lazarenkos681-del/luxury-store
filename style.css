@@ -524,3 +524,54 @@ nav {
     font-weight: bold;
 }
 .quick-price-edit:focus { border-color: var(--gold); outline: none; }
+:root {
+    --gold: #d4af37;
+    --gold-hover: #f1c40f;
+    --bg-dark: #0a0a0a;
+    --bg-card: #0f0f0f;
+    --bg-input: #1a1a1a;
+    --text: #ffffff;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg-dark); color: var(--text); font-family: var(--font-body); line-height: 1.6; }
+
+/* Навігація */
+nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 5%; background: rgba(0,0,0,0.95); position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid #222;
+}
+.logo a { font-family: var(--font-heading); color: var(--gold); font-size: 26px; letter-spacing: 4px; text-decoration: none; }
+.nav-links { display: flex; list-style: none; gap: 30px; }
+.nav-links a { color: #fff; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; }
+.nav-links a.active { color: var(--gold); }
+
+/* Картки товарів (Як на скріншоті) */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; padding: 50px 5%; }
+.product-card {
+    background: var(--bg-card); padding: 40px 20px; text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.3); transition: 0.4s;
+    display: flex; flex-direction: column; align-items: center;
+}
+.product-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+.product-card img { height: 300px; object-fit: contain; margin-bottom: 30px; }
+.product-card h3 { font-family: var(--font-heading); font-size: 20px; margin-bottom: 15px; }
+.price { color: var(--gold); font-size: 24px; font-weight: 700; margin-bottom: 25px; }
+.btn-gold { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 12px 35px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
+.btn-gold:hover { background: var(--gold); color: #000; }
+
+/* Адмінка (Темна тема) */
+.admin-container { max-width: 1000px; margin: 50px auto; padding: 20px; }
+.admin-card { background: #111; padding: 30px; border: 1px solid #222; margin-bottom: 40px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+input, select, textarea { background: var(--bg-input); border: 1px solid #333; color: #fff; padding: 12px; margin-bottom: 10px; width: 100%; }
+.btn-gold-filled { background: var(--gold); color: #000; border: none; padding: 15px; width: 100%; font-weight: 700; cursor: pointer; text-transform: uppercase; }
+.admin-item { display: flex; justify-content: space-between; align-items: center; background: #161616; padding: 15px; margin-bottom: 10px; border-left: 3px solid var(--gold); }
+.quick-price-edit { width: 80px; text-align: center; background: #000; color: var(--gold); border: 1px solid #333; }
+
+/* Футер */
+.site-footer { background: #050505; padding: 40px 5%; text-align: center; border-top: 1px solid #222; margin-top: 50px; }
+.footer-links a { color: var(--gold); text-decoration: none; margin: 0 15px; font-size: 14px; }

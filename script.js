@@ -199,3 +199,41 @@ if (cartBtn && cartDropdown) {
 }
 
 updateCart();
+// 1. LIVE PREVIEW (Слухаємо введення у форму)
+const formFields = ['prod-name', 'prod-price', 'prod-category', 'prod-img'];
+formFields.forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+        document.getElementById('prev-name').innerText = document.getElementById('prod-name').value || 'Назва товару';
+        document.getElementById('prev-price').innerText = document.getElementById('prod-price').value || '0';
+        document.getElementById('prev-cat').innerText = document.getElementById('prod-category').value;
+        const imgUrl = document.getElementById('prod-img').value;
+        if(imgUrl) document.getElementById('prev-img').src = imgUrl;
+    });
+});
+
+// 2. ФУНКЦІЯ ШВИДКОЇ ЗМІНИ ЦІНИ
+window.updatePrice = async (id, newPrice) => {
+    // Тут буде твій запит до Firebase: 
+    // await updateDoc(doc(db, "products", id), { price: Number(newPrice) });
+    console.log(`Ціну товару ${id} змінено на ${newPrice}`);
+};
+
+// 3. РЕНДЕР ТОВАРУ В АДМІНЦІ (Оновлений)
+function createAdminItem(product) {
+    return `
+        <div class="admin-item">
+            <img src="${product.image}" alt="">
+            <div>
+                <strong>${product.name}</strong>
+                <div style="font-size: 10px; color: ${product.inStock ? '#4caf50' : '#ff4d4d'}">
+                    ${product.inStock ? 'В НАЯВНОСТІ' : 'НЕМАЄ'}
+                </div>
+            </div>
+            <input type="number" class="quick-price-edit" value="${product.price}" 
+                   onchange="updatePrice('${product.id}', this.value)">
+            <div class="item-actions">
+                <button class="btn-delete" onclick="deleteProduct('${product.id}')">Видалити</button>
+            </div>
+        </div>
+    `;
+}

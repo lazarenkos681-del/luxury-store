@@ -12,36 +12,100 @@
         <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">GRAND RESERVE</a></div>
         <ul class="nav-links">
             <li><a href="index.html">На сайт</a></li>
-            <li><button id="logout-btn" style="background:none; border:1px solid var(--gold); color:var(--gold); padding:5px 15px; cursor:pointer; font-family:inherit;">Вийти</button></li>
+            <li><button id="logout-btn" class="btn-outline">Вийти</button></li>
         </ul>
     </nav>
 
-    <div class="admin-container wide" style="margin-top: 100px;">
-        <h2 style="color:var(--gold); font-family:'Playfair Display'; margin-bottom: 30px; text-align: center; text-transform: uppercase; letter-spacing: 2px;">Керування товарами</h2>
+    <div class="admin-container wide">
+        <h2 class="admin-title">Панель керування асортиментом</h2>
         
-        <div style="background: #111; padding: 30px; border: 1px solid #222; border-radius: 4px; margin-bottom: 50px;">
-            <h3 style="color:#fff; margin-bottom: 20px; font-size: 18px;">Додати новий товар</h3>
+        <div class="admin-card">
+            <h3>Додати новий товар</h3>
             <form id="add-product-form" class="admin-form">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <input type="text" id="prod-name" placeholder="Назва товару (напр. Macallan 12)" required>
+                <div class="form-grid">
+                    <input type="text" id="prod-name" placeholder="Назва (напр. Macallan 12)" required>
                     <input type="number" id="prod-price" placeholder="Ціна (грн)" required>
                     <select id="prod-category" required>
-                        <option value="" disabled selected>Оберіть категорію</option>
+                        <option value="" disabled selected>Категорія</option>
                         <option value="whisky">Віскі</option>
                         <option value="wine">Вино</option>
                         <option value="cognac">Коньяк</option>
                     </select>
-                    <input type="text" id="prod-img" placeholder="URL зображення (посилання)">
+                    <input type="text" id="prod-img" placeholder="URL зображення">
                 </div>
-                <textarea id="prod-desc" placeholder="Опис товару" style="width: 100%; margin-top: 15px; height: 80px;"></textarea>
-                <button type="submit" class="btn-gold-filled" style="margin-top: 20px; width: 100%;">Опублікувати товар</button>
+                <textarea id="prod-desc" placeholder="Короткий опис товару"></textarea>
+                <button type="submit" class="btn-gold-filled">Опублікувати</button>
             </form>
         </div>
 
-        <h3 style="color:var(--gold); margin-bottom: 20px; font-size: 18px;">Поточний асортимент</h3>
-        <div id="admin-product-list" class="admin-list">
+        <div class="inventory-section">
+            <div class="category-group">
+                <h3 class="cat-title">🥃 Віскі</h3>
+                <div id="list-whisky" class="admin-list"></div>
             </div>
+
+            <div class="category-group">
+                <h3 class="cat-title">🍷 Вино</h3>
+                <div id="list-wine" class="admin-list"></div>
+            </div>
+
+            <div class="category-group">
+                <h3 class="cat-title">🍸 Коньяк</h3>
+                <div id="list-cognac" class="admin-list"></div>
+            </div>
+        </div>
     </div>
+    <div class="admin-container wide">
+    <h2 class="admin-title">Панель керування</h2>
+    
+    <div class="admin-layout">
+        <div class="admin-card">
+            <h3>Додати новий товар</h3>
+            <form id="add-product-form" class="admin-form">
+                <div class="form-grid">
+                    <input type="text" id="prod-name" placeholder="Назва" required>
+                    <input type="number" id="prod-price" placeholder="Ціна" required>
+                    <select id="prod-category" required>
+                        <option value="whisky">Віскі</option>
+                        <option value="wine">Вино</option>
+                        <option value="cognac">Коньяк</option>
+                    </select>
+                    <input type="text" id="prod-img" placeholder="URL фото">
+                </div>
+                <div class="form-row">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="prod-stock" checked>
+                        <span class="checkmark"></span> В наявності
+                    </label>
+                </div>
+                <textarea id="prod-desc" placeholder="Опис товару"></textarea>
+                <button type="submit" class="btn-gold-filled">Опублікувати</button>
+            </form>
+        </div>
+
+        <div class="preview-card" id="live-preview">
+            <p class="preview-label">Попередній перегляд:</p>
+            <div class="product-card" style="margin:0; width: 100%;">
+                <img id="prev-img" src="https://via.placeholder.com/300x400?text=Grand+Reserve" alt="Прев'ю">
+                <div class="category-label" id="prev-cat">whisky</div>
+                <h3 id="prev-name">Назва товару</h3>
+                <div class="price"><span id="prev-price">0</span> ₴</div>
+                <button class="btn-gold">У КОШИК</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="inventory-section">
+        <div class="category-header">
+            <h3 class="cat-title">🥃 Віскі</h3>
+            <div class="sort-controls">
+                <button onclick="sortCategory('whisky', 'asc')">↑ Дешевше</button>
+                <button onclick="sortCategory('whisky', 'desc')">↓ Дорожче</button>
+            </div>
+        </div>
+        <div id="list-whisky" class="admin-list"></div>
+        </div>
+</div>
 
     <script type="module" src="script.js"></script>
 </body>

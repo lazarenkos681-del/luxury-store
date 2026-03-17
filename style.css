@@ -250,3 +250,58 @@ nav {
     .products-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
 }
+/* Додай це в кінець свого style.css або заміни весь файл, якщо впевнений */
+:root {
+    --gold: #d4af37;
+    --gold-hover: #f1c40f;
+    --dark: #0a0a0a;
+    --grey: #1a1a1a;
+    --text: #ffffff;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+/* Стилі для контентних сторінок */
+.content-page {
+    max-width: 900px;
+    margin: 120px auto 60px;
+    padding: 60px;
+    background: #0f0f0f;
+    border: 1px solid #222;
+    text-align: center;
+}
+
+.content-page h1 { color: var(--gold); margin-bottom: 30px; font-size: 42px; }
+.content-page p { color: #ccc; line-height: 1.8; margin-bottom: 20px; font-size: 17px; }
+
+/* Оновлений футер */
+.site-footer {
+    background: #050505;
+    padding: 60px 5%;
+    text-align: center;
+    border-top: 1px solid #222;
+    margin-top: 80px;
+}
+
+.footer-logo { font-family: var(--font-heading); color: var(--gold); font-size: 28px; letter-spacing: 4px; margin-bottom: 20px; }
+.footer-links { margin: 25px 0; }
+.footer-links a { color: var(--gold); text-decoration: none; margin: 0 15px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+.footer-links a:hover { color: var(--text); }
+.copyright { color: #444; font-size: 12px; margin-top: 20px; }
+
+/* Стиль карток (як на скріншоті) */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
+.product-card {
+    background: #0f0f0f; padding: 40px 20px; text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.3); transition: 0.4s;
+}
+.product-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+.product-card img { height: 300px; width: auto; object-fit: contain; margin-bottom: 30px; }
+.product-card .category-label { font-size: 12px; text-transform: lowercase; color: #888; margin-bottom: 8px; }
+.product-card h3 { font-family: var(--font-heading); font-size: 20px; margin-bottom: 15px; }
+.product-card .price { color: var(--gold); font-size: 24px; font-weight: 700; margin-bottom: 25px; }
+.btn-gold {
+    background: none; border: 1px solid var(--gold); color: var(--gold);
+    padding: 12px 35px; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+}
+.btn-gold:hover { background: var(--gold); color: #000; }
